@@ -1,0 +1,19 @@
+{
+  "name": "pimp-my-react",
+  "version": "0.0.1",
+  "description": "Pimping a react component",
+  "author": "Anders FLink",
+  "main": "index.js",
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "next": "^7.0.2",
+    "node-sass": "^4.10.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}

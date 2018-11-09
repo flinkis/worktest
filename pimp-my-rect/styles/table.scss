@@ -1,0 +1,57 @@
+.table {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+}
+
+.tableHeader {
+    background: #2c3e50;
+    padding: 18px 0;
+}
+
+.tableRow {
+    width: 100%;
+    padding: 18px 0;
+    text-align: center;
+
+    &:nth-of-type(odd) {
+        background: #e0e0e0;
+    }
+}
+
+.filterLink {
+    color: white;
+    position: relative;
+    padding: 24px 0;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        color: white;
+        font-size: 14px;
+        transform: translateY(-50%);
+    }
+    
+    &.desc::after {
+        content: '(desc)';
+    }
+
+    &.asc::after {
+        content: '(asc)';
+    }
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.iconCell {
+    width: 24px;
+}
