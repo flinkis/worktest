@@ -4,8 +4,8 @@ const Slider = ({ value, title, onChange = () => {} }) => {
     const handleChange = e => onChange(e.target.value, e.target.name)
 
     return (
-        <div className={ css.slider }>
-            <input type="range" 
+        <>
+            <input className={ css.range }  type="range" 
                 min="0" 
                 max="50" 
                 value={ value }
@@ -13,7 +13,7 @@ const Slider = ({ value, title, onChange = () => {} }) => {
                 step="1" 
                 onChange={ handleChange }/>
             <span className={ css.value }>{ value + '%' }</span>
-        </div>
+        </>
     )
 }
 

@@ -1,6 +1,5 @@
 .table {
     width: 100%;
-    border: 1px solid #eee;
     border-collapse: collapse;
 }
 
@@ -20,30 +19,32 @@
 }
 
 .filterLink {
-    color: white;
+    color: #fff;
     position: relative;
     padding: 24px 0;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    letter-spacing: 2px;
     text-align: center;
     cursor: pointer;
-    
-    &::after {
-        content: '';
-        position: absolute;
-        right: 18px;
-        top: 50%;
-        color: white;
-        font-size: 14px;
-        transform: translateY(-50%);
-    }
-    
-    &.desc::after {
-        content: '(desc)';
-    }
+}
 
-    &.asc::after {
-        content: '(asc)';
-    }
+.desc:after,
+.asc:after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    color: white;
+    font-size: 14px;
+    transform: translateY(-50%);
+}
+
+.desc:after {
+    content: '(desc)';
+}
+
+.asc:after {
+    content: '(asc)';
 }
 
 .icon {

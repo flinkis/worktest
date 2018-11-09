@@ -12,13 +12,13 @@ const Editor = ({ color, width, height, radius, handleChange = () => {}, handleS
                 <ColorPicker value={ color } handleChange={handleChange}/>
             </div>
             <div className={ css.column }>
-                <label>Width
-                    <input type="number" name="width" value={ width } onChange={ onChange }/>
+                <label className={ css.label }>Width
+                    <input className={ css.input }  type="number" name="width" value={ width } onChange={ onChange }/>
                 </label>
-                <label>Height
-                    <input type="number" name="height" value={ height } onChange={ onChange }/>
+                <label className={ css.label }>Height
+                    <input className={ css.input } type="number" name="height" value={ height } onChange={ onChange }/>
                 </label>
-                <label>Border Radius
+                <label className={ css.label }>Border Radius
                     <Slider title="radius" value={ radius } onChange={ handleChange }/>
                 </label>
             </div>

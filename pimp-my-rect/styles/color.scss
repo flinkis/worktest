@@ -1,26 +1,30 @@
 .colorPicker {
-    width: 90%;
-    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 100px 1fr 1fr;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    justify-items: center;
     border-radius: 20px;
-    font: 30px Arial;
     background-color: #fff;
     border: 1px solid #ccc;
-    overflow: auto;
-    padding-bottom: 15px;
+    padding: 0 10px 15px 10px;
 }
 
 .colorHeader {
-    width: 100%;
-    height: 100px;
+    width: calc(100% + 20px);
+    grid-column: span 8;
     border-radius: 20px 20px 0 0;
     text-align: center;
     color: #fff;
+    margin: 0 -10px 0 -10px;
 
     > h3 {
         position: relative;
         top: 50%;
         transform: translate3d(0, -50%, 0);
         margin: 0;
+        font-size: 26px;
     }
 }
 
@@ -28,6 +32,4 @@
     width: 25px;
     height: 25px;
     border-radius: 5px;
-    margin: 10px 0 0 10px;
-    float: left;
 }

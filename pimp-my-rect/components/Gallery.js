@@ -9,9 +9,12 @@ export default class Gallery extends React.Component {
         super(props);
 
         this.removeData = this.removeData.bind(this);
+        this.sortData = this.sortData.bind(this);
 
         this.state = {
             items: null,
+            sortKey: null,
+            sortOrderAsc: true
         };
     }
 
@@ -66,13 +69,44 @@ export default class Gallery extends React.Component {
         });
     }
 
+    sortData(key, desc) {
+        const { items, sortOrderAsc } = this.state;
+        let asc = true;
+
+        function compare(a, b) {
+            const type = (typeof(a[key]) === 'string' || typeof(b[key]) === 'string') ? 'string' : 'number';
+
+            if (type === 'string') {
+                return a[key].localeCompare(b[key]);   
+            } else {
+                return a[key] - b[key];
+            }
+        }
+
+        items.sort(compare);
+
+        if (sortOrderAsc) {
+            asc = false;
+            items.reverse();
+        } 
+
+        this.setData(items, 'items');
+
+        this.setState({ 
+            sortOrderAsc: asc, 
+            sortKey: key 
+        });
+    }
+
     render() {
         const { items } = this.state;
         const { handleLoad } = this.props;
+        const hasItems = (items && items.length > 0);
 
         return (
-            <div className={css.gallery}>
-                <Table items={ items } handleLoad={ handleLoad } removeData={ this.removeData }/>
+            <div className={ css.gallery }>
+                { hasItems && <Table { ...this.state } handleLoad={ handleLoad } removeData={ this.removeData } sortData={ this.sortData } /> }
+                { !hasItems && <h3>There are no saved elements, please come again...</h3> }
             </div>
         )
     }
