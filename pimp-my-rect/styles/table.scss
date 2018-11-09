@@ -31,10 +31,7 @@
 .desc:after,
 .asc:after {
     content: '';
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    color: white;
+    color: #fff;
     font-size: 14px;
     transform: translateY(-50%);
 }

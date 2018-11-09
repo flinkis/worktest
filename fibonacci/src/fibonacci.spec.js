@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const { encode, decode } = require('../src/fibonacci-example');
+const { encode, decode } = require('../src/fibonacci');
 
 describe('fibonacci', () => {
 	it('should encode fibonacci', () => {

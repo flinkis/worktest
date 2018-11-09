@@ -12,14 +12,14 @@ export default class Gallery extends React.Component {
         this.sortData = this.sortData.bind(this);
 
         this.state = {
-            items: null,
+            items: [],
             sortKey: null,
             sortOrderAsc: true
         };
     }
 
     componentDidMount() {
-        if(localStorage.getItem('items')) {
+        if (localStorage.getItem('items')) {
             this.getData('items', result => {
                 this.setState({
                     items: result
@@ -37,6 +37,7 @@ export default class Gallery extends React.Component {
 
     getData(key, callback) {
         const result = JSON.parse(localStorage.getItem(key));
+
         if (typeof callback === "function") {
             callback(result)
         }
@@ -44,6 +45,7 @@ export default class Gallery extends React.Component {
 
     setData(data, key) {
         localStorage.setItem(key, JSON.stringify(data));
+
         this.setState({
             items: data
         });
@@ -72,25 +74,24 @@ export default class Gallery extends React.Component {
     sortData(key, desc) {
         const { items, sortOrderAsc } = this.state;
         let asc = true;
+        let sortedArray = items;
 
-        function compare(a, b) {
-            const type = (typeof(a[key]) === 'string' || typeof(b[key]) === 'string') ? 'string' : 'number';
-
-            if (type === 'string') {
+        const compare = (a, b) => {
+            if (isNaN(parseInt(a[key])) || isNaN(parseInt(b[key]))) {
                 return a[key].localeCompare(b[key]);   
             } else {
-                return a[key] - b[key];
+                return parseInt(a[key]) - parseInt(b[key]);
             }
-        }
+        };
 
-        items.sort(compare);
+        sortedArray.sort(compare);
 
         if (sortOrderAsc) {
             asc = false;
-            items.reverse();
+            sortedArray.reverse();
         } 
 
-        this.setData(items, 'items');
+        this.setData(sortedArray, 'items');
 
         this.setState({ 
             sortOrderAsc: asc, 

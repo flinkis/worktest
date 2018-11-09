@@ -33,4 +33,4 @@ What you need to do is to implement a decoder and an encoder for translating bac
 1. Install NodeJS (https://nodejs.org/en/)
 2. run 'yarn install' or 'npm install'
 3. Implement the encode & decode in 'src/fibonacci.js'
-4. run 'yarn test:watch' or 'npm install'
+4. run 'yarn test:watch' or 'npm run text:watch'

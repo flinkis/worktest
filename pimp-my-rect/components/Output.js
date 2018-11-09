@@ -1,14 +1,10 @@
 import css from "../styles/general.scss"
 
-const toPercent = (number) => {
-    return number + '%'
-}
+const toPercent = number => number + '%'
 
-const appendPx = (number) => (
-    number + 'px'
-)
+const appendPx = number => number + 'px'
 
-const Output = (props) => (
+const Output = props => (
     <div className={css.outputWrapper} >
         <div className={css.output} style={{
             backgroundColor: props.color, 

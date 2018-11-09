@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Head from 'next/head'
 
 import Output from '../components/Output'
@@ -44,7 +44,7 @@ export default class Index extends React.Component {
         const { data, save } = this.state;
 
         return (
-            <>
+            <Fragment>
                 <Head>
                     <title>Pimp-My-React</title>
                     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Roboto+Slab" rel="stylesheet" />
@@ -59,7 +59,7 @@ export default class Index extends React.Component {
                     <Editor {...data} handleChange={ this.setData } handleSave={ this.onSave } />
                     <Gallery handleLoad={ this.onLoad } handleSave={ this.onSave } shouldSave={ save } data={ data } />
                 </div>
-            </>
+            </Fragment>
         )
     }
 }

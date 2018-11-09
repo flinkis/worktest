@@ -1,19 +1,21 @@
+import { Fragment } from 'react'
 import css from "../../styles/editor.scss"
 
-const Slider = ({ value, title, onChange = () => {} }) => {
-    const handleChange = e => onChange(e.target.value, e.target.name)
+const Slider = ({ name, value, onChange = () => {} }) => {
+    const handleChange = e => onChange(e.target.value, e.target.name);
 
     return (
-        <>
-            <input className={ css.range }  type="range" 
-                min="0" 
-                max="50" 
+        <Fragment>
+            <input className={ css.range }
+                type="range"
+                min="0"
+                max="50"
                 value={ value }
-                name={ title }
-                step="1" 
+                name={ name }
+                step="1"
                 onChange={ handleChange }/>
             <span className={ css.value }>{ value + '%' }</span>
-        </>
+        </Fragment>
     )
 }
 

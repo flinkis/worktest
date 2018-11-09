@@ -1,8 +1,8 @@
 import css from "../../styles/color.scss"
 
-const ColorHeader = ({ selected }) => (
-    <div style={ { backgroundColor: selected } } className={ css.colorHeader }>
-        <h3>{ selected }</h3>
+const ColorHeader = ({ value }) => (
+    <div style={ { backgroundColor: value } } className={ css.colorHeader }>
+        <h3>{ value }</h3>
     </div>
 )
 
