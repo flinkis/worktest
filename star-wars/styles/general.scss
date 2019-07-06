@@ -1,0 +1,126 @@
+body {
+    background-color: #f3f3f3;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.header {
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 0;
+    background: radial-gradient(
+        ellipse at bottom,
+        rgb(9, 76, 114) 0%,
+        rgb(1, 41, 63) 100%
+    );
+
+    &__title {
+        text-transform: uppercase;
+        font-size: 3rem;
+        margin: 1rem 0 0;
+    }
+    &__subtitle {
+        font-size: 1.3rem;
+        margin: 0.5rem 0 0;
+    }
+}
+
+.title {
+    font-size: 2rem;
+    margin: 0.5rem 0 0 40px;
+}
+
+.goback {
+    width: 40px;
+    padding: 40px 20px 0 20px;
+    float: left;
+}
+
+.films {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.film {
+    box-sizing: border-box;
+    width: calc(33% - 23.3px);
+    margin: 20px 0 0 20px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 25px;
+    cursor: pointer;
+
+    @media screen and (max-width: 840px) {
+        width: calc(50% - 30px);
+    }
+    @media screen and (max-width: 400px) {
+        width: calc(100% - 40px);
+    }
+}
+
+.characters {
+    display: flex;
+    flex-flow: wrap;
+
+    &__title {
+        margin: 0.5rem 0 0 40px;
+    }
+}
+
+.character {
+    box-sizing: border-box;
+    width: calc(33% - 13.3px);
+    padding: 10px;
+    margin: 10px 0 0 10px;
+    position: relative;
+
+    p {
+        padding-left: 5px;
+        margin: 0;
+    }
+    strong {
+        margin-right: 5px;
+    }
+
+    @media screen and (max-width: 840px) {
+        width: calc(50% - 15px);
+    }
+    @media screen and (max-width: 400px) {
+        width: calc(100% - 20px);
+    }
+
+    &__header {
+        font-family: Arial, Helvetica, sans-serif;
+        border-bottom: 2px solid lightgreen;
+        padding: 0 0 14px 15px;
+        width: calc(100% - 48px);
+    }
+
+    &__number {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        border-radius: 50%;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        padding: 10px;
+        border: 2px solid lightgreen;
+    }
+
+    &__link {
+        display: inline-block;
+        width: 20px;
+        cursor: pointer;
+        margin: 5px;
+    }
+}
