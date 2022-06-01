@@ -1,0 +1,41 @@
+:root {
+  --main-text-color: #869ba9;
+  --main-inverted-color: #000;
+  --main-color-1: #051622;
+  --main-color-2: #1ba098;
+  --main-color-3: #deb992;
+}
+
+.main {
+  --padding-top: 200px;
+
+  min-height: calc(100vh - var(--padding-top) - 70px);
+  background-color: var(--main-color-1);
+  color: var(--main-text-color);
+  padding-top: var(--padding-top);
+  padding-bottom: 70px;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: calc(100% - 32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    --padding-top: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    --padding-top: 120px;
+  }
+}
