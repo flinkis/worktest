@@ -1,7 +1,10 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from '../components/Header';
 import './styles/Site.css';
+
+import React, { Suspense, lazy } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
+import Header from '../components/Header';
+import Loading from '../components/Loading';
 
 const ListView = lazy(() => import('./ListView'));
 const DetailView = lazy(() => import('./DetailView'));
@@ -11,7 +14,7 @@ const Site = () => (
     <Header />
     <div className="main">
       <div className="container">
-        <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<ListView />} />
             <Route path="/:id" element={<DetailView />} />

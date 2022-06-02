@@ -3,20 +3,39 @@ import './styles/DetailView.css';
 import React, { useEffect, useState } from 'react';
 
 import ErrElement from '../components/Error';
+import Loading from '../components/Loading';
 import axios from 'axios';
 import { show } from '../types/show';
 import { useParams } from 'react-router';
 
+interface state {
+  show: show;
+  err: boolean;
+  loading: boolean;
+}
+
 const DetailView = () => {
   let { id } = useParams<'id'>();
-  const [show, setShow] = useState<show>();
+  const [state, setState] = useState<Partial<state>>({ loading: false });
 
   const fetchShow = async () => {
-    const { data } = await axios.get<show>(
-      `https://api.tvmaze.com/shows/${id}`
-    );
-    if (data) {
-      setShow(data);
+    let timer;
+
+    if (!state.loading) {
+      setState({ loading: true });
+      try {
+        timer = setTimeout(() => {
+          throw new Error('Time out!');
+        }, 3000);
+        const { data } = await axios.get<show>(
+          `https://api.tvmaze.com/shows/${id}`
+        );
+        clearTimeout(timer);
+        setState({ loading: false, show: data });
+      } catch (e) {
+        clearTimeout(timer);
+        setState({ loading: false, err: true });
+      }
     }
   };
 
@@ -27,33 +46,39 @@ const DetailView = () => {
   }, [id]);
 
   useEffect(() => {
-    if (show && show.image) {
+    if (state.show && state.show.image) {
       document.documentElement.style.setProperty(
         '--background-blur',
-        `url(${show.image.medium})`
+        `url(${state.show.image.medium})`
       );
     }
     return () => {
       document.documentElement.style.setProperty('--background-blur', ``);
     };
-  }, [show]);
+  }, [state.show]);
 
-  return show ? (
+  if (state.loading) {
+    return <Loading />;
+  } else if (state.err) {
+    return <ErrElement />;
+  }
+
+  return state.show ? (
     <div className="detailView">
       <div className="show-content">
         <img
           src={
-            show.image
-              ? show.image.medium
+            state.show.image
+              ? state.show.image.medium
               : 'https://dummyimage.com/200x295/fff/aaa'
           }
-          alt={show.name}
+          alt={state.show.name}
         />
 
         <div className="show-detail">
-          <h2>{show.name}</h2>
+          <h2>{state.show.name}</h2>
           <ul className="show-tags">
-            {show.genres.map(genre => (
+            {state.show.genres.map(genre => (
               <li className="show-genre" key={genre}>
                 {genre}
               </li>
@@ -61,36 +86,34 @@ const DetailView = () => {
           </ul>
           <div
             className="show-plot"
-            dangerouslySetInnerHTML={{ __html: show.summary }}
+            dangerouslySetInnerHTML={{ __html: state.show.summary }}
           />
           <ul className="show-info">
-            {show.network ? (
+            {state.show.network ? (
               <li>
-                <b>Network:</b> {show.network.name}
+                <b>Network:</b> {state.show.network.name}
               </li>
             ) : null}
-            {show.runtime ? (
+            {state.show.runtime ? (
               <li>
-                <b>Runtime:</b> {show.runtime}min
+                <b>Runtime:</b> {state.show.runtime}min
               </li>
             ) : null}
-            {show.rating ? (
+            {state.show.rating ? (
               <li>
-                <b>Rating:</b> {show.rating.average}
+                <b>Rating:</b> {state.show.rating.average}
               </li>
             ) : null}
-            {show.status ? (
+            {state.show.status ? (
               <li>
-                <b>Status:</b> {show.status}
+                <b>Status:</b> {state.show.status}
               </li>
             ) : null}
           </ul>
         </div>
       </div>
     </div>
-  ) : (
-    <ErrElement />
-  );
+  ) : null;
 };
 
 export default DetailView;

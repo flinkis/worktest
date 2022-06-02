@@ -1,16 +1,23 @@
 import './styles/ListView.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { searchResult, show } from '../types/show';
 
 import ErrElement from '../components/Error';
+import Loading from '../components/Loading';
 import Show from '../components/Show';
 import axios from 'axios';
-import { searchResult } from '../types/show';
 import { useSearchParams } from 'react-router-dom';
 
+interface state {
+  shows: searchResult[];
+  err: boolean;
+  loading: boolean;
+}
+
 const ListView = () => {
-  const [shows, setShows] = useState<searchResult[]>([]);
-  const [err, setErr] = useState<boolean>();
+  const [state, setState] = useState<Partial<state>>({ loading: false });
+
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q');
 
@@ -23,24 +30,39 @@ const ListView = () => {
   }, [query]);
 
   const fetchSearch = async (query = '') => {
-    try {
-      const { data } = await axios.get<searchResult[]>(
-        `https://api.tvmaze.com/search/shows?q=${query}`
-      );
-      setShows(data);
-    } catch (e) {
-      setErr(true);
+    let timer;
+
+    if (!state.loading) {
+      setState({ loading: true });
+      try {
+        timer = setTimeout(() => {
+          throw new Error('Time out!');
+        }, 3000);
+        const { data } = await axios.get<searchResult[]>(
+          `https://api.tvmaze.com/search/shows?q=${query}`
+        );
+        clearTimeout(timer);
+        setState({ loading: false, shows: data });
+      } catch (e) {
+        clearTimeout(timer);
+        setState({ loading: false, err: true });
+      }
     }
   };
 
-  return !err ? (
+  if (state.loading) {
+    return <Loading />;
+  } else if (state.err) {
+    return <ErrElement />;
+  }
+
+  return (
     <div className="shows_container">
-      {shows.map(({ show }) => (
-        <Show key={show.id} {...show} />
-      ))}
+      {state.shows &&
+        state.shows.map(({ show }: { show: show }) => (
+          <Show key={show.id} {...show} />
+        ))}
     </div>
-  ) : (
-    <ErrElement />
   );
 };
 
