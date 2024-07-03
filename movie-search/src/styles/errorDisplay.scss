@@ -1,0 +1,25 @@
+.error-display {
+  position: fixed;
+  top: 64px; // Adjust this value based on your header height
+  left: 0;
+  right: 0;
+  background-color: #f44336;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  z-index: 999; // Just below the header
+
+  button {
+    margin-left: 1rem;
+    padding: 0.25rem 0.5rem;
+    background-color: white;
+    color: #f44336;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+    }
+  }
+}

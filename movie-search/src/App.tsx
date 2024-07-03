@@ -1,23 +1,17 @@
-import React, { Suspense, lazy } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import Layout from "./components/layout/layout";
+import AppRoutes from "./Routes";
 
-import Header from "./components/Header";
-
-const ListView = lazy(() => import("./components/ListView"));
-const DetailView = lazy(() => import("./components/DetailView"));
-
-const Site = () => (
-  <Router>
-    <Header />
-    <main>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<ListView />} />
-          <Route path="/:imdbId" element={<DetailView />} />
-        </Routes>
-      </Suspense>
-    </main>
-  </Router>
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Layout>
+        <AppRoutes />
+      </Layout>
+    </Router>
+  </Provider>
 );
 
-export default Site;
+export default App;

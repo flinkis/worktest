@@ -1,0 +1,43 @@
+@keyframes shimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+  
+  .skeleton-movie-card {
+    width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0;
+  
+    .skeleton-poster {
+      height: 300px;
+      background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+      background-size: 800px 104px;
+      animation: shimmer 1.5s infinite linear;
+    }
+  
+    .skeleton-info {
+      padding: 12px;
+  
+      .skeleton-title {
+        height: 20px;
+        margin-bottom: 8px;
+        background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+        background-size: 800px 104px;
+        animation: shimmer 1.5s infinite linear;
+      }
+  
+      .skeleton-year {
+        height: 16px;
+        width: 50%;
+        background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+        background-size: 800px 104px;
+        animation: shimmer 1.5s infinite linear;
+      }
+    }
+  }

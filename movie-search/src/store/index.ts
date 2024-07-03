@@ -1,11 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
-import { moviesApi } from "./api/moviesApi";
-
-const rootReducer = combineReducers({
-  [moviesApi.reducerPath]: moviesApi.reducer,
-});
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducer";
+import { moviesApi } from "../api/moviesApi";
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -17,7 +13,7 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-type AppDispatch = typeof store.dispatch;
+export type AppDispatch = typeof store.dispatch;
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch;
